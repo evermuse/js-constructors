@@ -96,23 +96,34 @@ function Spellcaster(name, health, mana) {
   this.name = name;
   this.health = health;
   this.mana = mana;
+  this.isAlive = true;
 
 }
 
 Spellcaster.prototype.inflictDamage = function(damage) {
 
-  var isAlive = true;
-
-  if (damage < this.health) {
+  if (this.health > 0) {
 
     this.health -= damage;
 
-  } else {
+    if (this.health <= 0) {
 
-    isAlive = false;
+      this.health = 0;
+      this.isAlive = false;
+
+    }
+
+  } else if (damage >= this.health) {
+
+    this.health = 0;
+    this.isAlive = false;
 
   }
 
+};
+
+Spellcaster.prototype.mana = function(first_argument) {
+  // body...
 };
 
   /**
