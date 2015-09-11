@@ -186,21 +186,35 @@ Spellcaster.prototype.spendMana = function(cost) {
  * @return {boolean}                    Whether the spell was successfully cast.
  */
 
-   Spellcaster.prototype.invoke = function(spell, target) {
+Spellcaster.prototype.invoke = function(spell, target) {
 
   if (spell instanceof DamageSpell) {
 
-    target = Spellcaster;
+    if (target === undefined || target === null) {
 
-    if (Spellcaster.prototype.spendMana) {
+      return false;
 
-      Spellcaster.prototype.inflictDamage;
+    } else if (this.spendMana(spell.cost)) {
+
+      target.inflictDamage(spell.damage);
+      return true;
+
+    } else {
+
+      return false;
 
     }
 
   } else if (spell instanceof Spell) {
 
-    Spellcaster.prototype.spendMana;
+    if (this.spendMana(spell.cost)) {
+
+      return true;
+
+    } else {
+
+      return false;
+    }
 
   } else {
 
